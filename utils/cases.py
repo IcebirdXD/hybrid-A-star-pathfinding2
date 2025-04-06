@@ -37,15 +37,15 @@ class TestCase:
             [16, 6, 4, 0.1],
             [14, 0, 0.1, 6],
         ]
+
+
 class TestCase2:
+    """ Provide some test cases for a 10x10 map. """
 
     def __init__(self):
 
-        # self.start_pos = [1, 8, 0]
-        # self.end_pos = [3, 8, 0]
-        self.start_pos = [5, 5, 0]
-        self.end_pos = [6, 5, 3*pi/4]
-
+        self.start_pos = [0.2, 0.2, 0]
+        self.end_pos = [0.8, 1, 0]
 
         # [x_position, y_position, x_width, y_width]
         self.obs = [

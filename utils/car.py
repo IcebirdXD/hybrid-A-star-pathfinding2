@@ -6,7 +6,7 @@ from matplotlib.collections import PatchCollection
 import matplotlib.animation as animation
 
 from utils.environment import Environment
-from utils.cases import TestCase, TestCase2
+from utils.cases import TestCase
 from utils.utils import transform, same_point
 
 from time import time
@@ -23,17 +23,17 @@ class State:
 class SimpleCar:
     """ Car model and functions. """
     # Here you define the vehicle size "l" and the maximun_drift angle max_phi
-    def __init__(self, env, start_pos=None, end_pos=None, l=0.01, max_phi=pi/2):
+    def __init__(self, env, start_pos=None, end_pos=None, l=1, max_phi=pi/5):
 
         self.env = env
         self.l = float(l)
         self.max_phi = max_phi
 
-        self.carl = 0.4
-        self.carw = 0.3
+        self.carl = 0.4 * self.l
+        self.carw = 0.3 * self.l
 
-        self.whll = 0.05
-        self.whlw = 0.02
+        self.whll = 0.05 * self.l
+        self.whlw = 0.01 * self.l
 
         if start_pos:
             self.start_pos = start_pos
@@ -201,7 +201,7 @@ class SimpleCar:
 
 def main():
 
-    tc = TestCase2()
+    tc = TestCase()
 
     env = Environment()
 

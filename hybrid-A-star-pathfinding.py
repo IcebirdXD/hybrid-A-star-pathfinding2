@@ -54,9 +54,9 @@ class HybridAstar:
         
         self.w1 = 0.95 # weight for astar heuristic
         self.w2 = 0.05 # weight for simple heuristic
-        self.w3 = 0.40 # weight for extra cost of steering angle change
+        self.w3 = 0.30 # weight for extra cost of steering angle change
         self.w4 = 0.10 # weight for extra cost of turning
-        self.w5 = 1.00 # weight for extra cost of reversing
+        self.w5 = 2.00 # weight for extra cost of reversing
 
         self.thetas = get_discretized_thetas(self.unit_theta)
     
@@ -199,12 +199,11 @@ class HybridAstar:
         count = 0
         while open_:
             count += 1
-            print('Iteration:', count)
             best = min(open_, key=lambda x: x.f)
 
             open_.remove(best)
             closed_.append(best)
-            
+
             # check dubins path
             if count % self.check_dubins == 0:
                 solutions = self.dubins.find_tangents(best.pos, self.goal)
@@ -249,7 +248,7 @@ class HybridAstar:
 
 def main_hybrid_a(heu,start_pos, end_pos,reverse, extra, grid_on):
 
-    tc = map_grid()
+    tc = map_grid2()
     env = Environment(tc.obs)
     car = SimpleCar(env, start_pos, end_pos)
     grid = Grid(env)
@@ -421,6 +420,25 @@ class map_grid:
             [14, 0, 0.1, 6],          
         ]
 
+class map_grid2:
+    """Here the obstacles are defined for a 20x20 map."""
+    def __init__(self):
+
+        self.start_pos2 = [0.2, 0.2, 0]
+        self.end_pos2 = [0.8, 1, 0]
+
+        # [x_position, y_position, x_width, y_width]
+        self.obs = [
+            # [0.25, 1.1, 0.5, 0.2],   # box_wall_right
+            [0.25, 1.1, 0.5, 0.2],   # box_wall_left
+            [1.7, 0.8, 0.5, 0.2],    # box_wp1
+            [3.41, 0.8, 0.5, 0.2],   # box_wp2
+            [1.3, 1.85, 0.2, 0.4],   # random_1
+            [2.3, 1.85, 0.4, 0.4],   # random_2
+            [3.81, 1.95, 0.4, 0.2],  # box_wp6
+        ]
+
+
 if __name__ == '__main__':
     print("Executing hybrid A* algorithm")
     p = argparse.ArgumentParser()
@@ -429,7 +447,7 @@ if __name__ == '__main__':
     p.add_argument('-e', action='store_true', help='add extra cost or not')
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
-    start_pos = [1, 1, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [10, 10, pi/4] # Target point [x,y, angle]
+    start_pos = [0.3, 0.3, 0]      # Here defined initial position [x,y,angle]
+    end_pos = [0.2, 0.3, 0] # Target point [x,y, angle]
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
