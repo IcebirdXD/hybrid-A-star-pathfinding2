@@ -448,6 +448,6 @@ if __name__ == '__main__':
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
     start_pos = [0.3, 0.3, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [0.2, 0.3, 0] # Target point [x,y, angle]
+    end_pos = [1.7, 0.5, 0] # Target point [x,y, angle]
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
