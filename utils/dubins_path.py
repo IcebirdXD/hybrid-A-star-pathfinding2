@@ -208,7 +208,7 @@ class DubinsPath:
     
     def is_turning_route_safe(self, start_pos, end_pos, d, c, r):
         """ Check if a turning route is safe. """
-        print("Is the turning route safe?")
+        #print("Is the turning route safe?")
         # a turning_route is decomposed into:
         #   1. start_pos (checked previously as end_pos)
         #   2. end_pos

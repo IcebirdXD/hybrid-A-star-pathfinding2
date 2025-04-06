@@ -117,7 +117,7 @@ class HybridAstar:
                 d, c, r = self.car.get_params(pos1, phi)
                 safe = self.dubins.is_turning_route_safe(pos1, pos2, d, c, r)
             # --------------------------------------------
-            print(f"Checking child at position: {pos}, safe: {safe}")  # Debug print
+            print(f"Dubins path check: pos1={pos1}, pos2={pos2}, safe={safe}")
             if not safe:
                 continue
             

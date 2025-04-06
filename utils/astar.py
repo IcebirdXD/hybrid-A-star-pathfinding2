@@ -78,6 +78,8 @@ class Astar:
 
         goal = self.grid.to_cell_id(goal)
 
+        print(f"Attempting to connect to goal: {goal}")
+
         if goal in self.table:
             return self.table[self.table.index(goal)].g
 
@@ -88,7 +90,12 @@ class Astar:
         closed_ = []
         open_ = [root]
 
+        count = 0
+
         while open_:
+
+            count += 1
+            print(f"Iteration {count}: Open list size: {len(open_)}, Closed list size: {len(closed_)}")
 
             best = min(open_, key=lambda x: x.f)
 

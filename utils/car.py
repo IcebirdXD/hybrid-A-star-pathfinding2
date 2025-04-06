@@ -76,16 +76,16 @@ class SimpleCar:
     
     def get_car_bounding(self, pos):
         """ Get the bounding rectangle of car. """
-
+        #print("x={x}, y={y}, theta={theta}".format(x=pos[0], y=pos[1], theta=pos[2]))
         x, y, theta = pos
 
-        self.c1 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 1)
-        self.c2 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 2)
-        self.c3 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 3)
-        self.c4 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 4)
+        self.c1 = transform(x, y, 0.15*self.l, 0.15*self.l, theta, 1)
+        self.c2 = transform(x, y, 0.15*self.l, 0.15*self.l, theta, 2)
+        self.c3 = transform(x, y, 0.15*self.l, 0.15*self.l, theta, 3)
+        self.c4 = transform(x, y, 0.15*self.l, 0.15*self.l, theta, 4)
         #print("c1:", self.c1)
         vertex = [self.c1.tolist(), self.c2.tolist(), self.c4.tolist(), self.c3.tolist()]
-        print(f"Bounding box vertices: {vertex}")
+        #print(f"Bounding box vertices: {vertex}")
         return vertex
     
     def get_car_state(self, pos, phi=0):
