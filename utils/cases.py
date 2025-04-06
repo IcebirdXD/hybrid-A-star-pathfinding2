@@ -44,7 +44,7 @@ class TestCase2:
 
     def __init__(self):
 
-        self.start_pos = [0.2, 0.2, 0]
+        self.start_pos = [0.3, 0.3, 0]
         self.end_pos = [0.8, 1, 0]
 
         # [x_position, y_position, x_width, y_width]

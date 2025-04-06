@@ -6,7 +6,7 @@ from matplotlib.collections import PatchCollection
 import matplotlib.animation as animation
 
 from utils.environment import Environment
-from utils.cases import TestCase
+from utils.cases import TestCase, TestCase2
 from utils.utils import transform, same_point
 
 from time import time
@@ -79,13 +79,13 @@ class SimpleCar:
 
         x, y, theta = pos
 
-        self.c1 = transform(x, y, 1.3*self.l, 0.4*self.l, theta, 1)
-        self.c2 = transform(x, y, 1.3*self.l, 0.4*self.l, theta, 2)
-        self.c3 = transform(x, y, 0.3*self.l, 0.4*self.l, theta, 3)
-        self.c4 = transform(x, y, 0.3*self.l, 0.4*self.l, theta, 4)
-
+        self.c1 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 1)
+        self.c2 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 2)
+        self.c3 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 3)
+        self.c4 = transform(x, y, 0.3*self.l, 0.3*self.l, theta, 4)
+        #print("c1:", self.c1)
         vertex = [self.c1.tolist(), self.c2.tolist(), self.c4.tolist(), self.c3.tolist()]
-
+        print(f"Bounding box vertices: {vertex}")
         return vertex
     
     def get_car_state(self, pos, phi=0):
@@ -143,7 +143,7 @@ class SimpleCar:
         """ Check route safety. """
 
         safe = True
-
+        print("Route safety check...")
         for goal, phi, m in route:
             while True:
                 pos = self.step(pos, phi, m)
@@ -158,7 +158,7 @@ class SimpleCar:
             
             if not safe:
                 break
-
+        print("Route safety: ", safe)
         return safe
     
     def get_path(self, pos, route):
@@ -201,7 +201,7 @@ class SimpleCar:
 
 def main():
 
-    tc = TestCase()
+    tc = TestCase2()
 
     env = Environment()
 

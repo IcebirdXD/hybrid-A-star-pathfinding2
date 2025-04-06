@@ -27,7 +27,7 @@ from utils.utils import plot_a_car, get_discretized_thetas, round_theta, same_po
 
 class HybridAstar:
     """ Hybrid A* search procedure. """
-    def __init__(self, car, grid, reverse, unit_theta=pi/12, dt=1e-2, check_dubins=1):
+    def __init__(self, car, grid, reverse=True, unit_theta=pi/12, dt=1e-2, check_dubins=1):
         self.car = car
         self.grid = grid
         self.reverse = reverse
@@ -424,8 +424,8 @@ class map_grid2:
     """Here the obstacles are defined for a 20x20 map."""
     def __init__(self):
 
-        self.start_pos2 = [0.2, 0.2, 0]
-        self.end_pos2 = [0.8, 1, 0]
+        self.start_pos2 = [0.3, 0.3, 0]
+        self.end_pos2 = [0.8, 0.5, 0]
 
         # [x_position, y_position, x_width, y_width]
         self.obs = [

@@ -208,6 +208,7 @@ class DubinsPath:
     
     def is_turning_route_safe(self, start_pos, end_pos, d, c, r):
         """ Check if a turning route is safe. """
+        print("Is the turning route safe?")
         # a turning_route is decomposed into:
         #   1. start_pos (checked previously as end_pos)
         #   2. end_pos
@@ -215,16 +216,19 @@ class DubinsPath:
         #   4. outer ringsector
 
         if not self.car.is_pos_safe(end_pos):
+            print("The end_pos is not safe!")
             return False
         
         rs_inner, rs_outer = self.construct_ringsectors(start_pos, end_pos, d, c, r)
         
         if not self.car.env.ringsector_safe(rs_inner):
+            print("The inner ringsector is not safe!")
             return False
         
         if not self.car.env.ringsector_safe(rs_outer):
+            print("The outer ringsector is not safe!")
             return False
-
+        print("The turning route is safe!")
         return True
     
     def construct_ringsectors(self, start_pos, end_pos, d, c, r):
