@@ -17,7 +17,7 @@ class Environment:
         else:
             self.obs = []
     
-    def rectangle_inbounds(self, rect, safe_dis=0.05):
+    def rectangle_inbounds(self, rect, safe_dis=0.001):
         """ Check rectangle target within the map bounds. """
 
         for v in rect:

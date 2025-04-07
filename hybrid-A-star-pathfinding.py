@@ -15,7 +15,6 @@ from utils.environment import Environment
 from utils.dubins_path import DubinsPath
 from utils.astar import Astar
 from utils.utils import plot_a_car, get_discretized_thetas, round_theta, same_point
-from utils.cases import TestCase2
 
 
 """ ---------------------------------------------------------------
@@ -28,7 +27,7 @@ from utils.cases import TestCase2
 
 class HybridAstar:
     """ Hybrid A* search procedure. """
-    def __init__(self, car, grid, reverse=True, unit_theta=pi/12, dt=1e-2, check_dubins=1):
+    def __init__(self, car, grid, reverse=True, unit_theta=pi/32, dt=1e-2, check_dubins=1):
         self.car = car
         self.grid = grid
         self.reverse = reverse
@@ -55,9 +54,9 @@ class HybridAstar:
         
         self.w1 = 0.95 # weight for astar heuristic
         self.w2 = 0.05 # weight for simple heuristic
-        self.w3 = 0.40 # weight for extra cost of steering angle change
+        self.w3 = 0.30 # weight for extra cost of steering angle change
         self.w4 = 0.10 # weight for extra cost of turning
-        self.w5 = 1.00 # weight for extra cost of reversing
+        self.w5 = 2.00 # weight for extra cost of reversing
 
         self.thetas = get_discretized_thetas(self.unit_theta)
     
@@ -118,7 +117,7 @@ class HybridAstar:
                 d, c, r = self.car.get_params(pos1, phi)
                 safe = self.dubins.is_turning_route_safe(pos1, pos2, d, c, r)
             # --------------------------------------------
-            
+            #print(f"Dubins path check: pos1={pos1}, pos2={pos2}, safe={safe}")
             if not safe:
                 continue
             
@@ -200,12 +199,11 @@ class HybridAstar:
         count = 0
         while open_:
             count += 1
-            print('Iteration:', count)
             best = min(open_, key=lambda x: x.f)
 
             open_.remove(best)
             closed_.append(best)
-            
+
             # check dubins path
             if count % self.check_dubins == 0:
                 solutions = self.dubins.find_tangents(best.pos, self.goal)
@@ -250,7 +248,7 @@ class HybridAstar:
 
 def main_hybrid_a(heu,start_pos, end_pos,reverse, extra, grid_on):
 
-    tc = TestCase2()
+    tc = map_grid2()
     env = Environment(tc.obs)
     car = SimpleCar(env, start_pos, end_pos)
     grid = Grid(env)
@@ -412,6 +410,25 @@ class map_grid:
         self.start_pos2 = [4, 4, 0]  # default values
         self.end_pos2 = [4, 8, -pi]  # default
         self.obs = [
+            [0, 6, 6, 0.1],
+            [6, 0, 0.1, 4],
+            [0, 14, 4, 0.1],
+            [6, 14, 0.1, 6],
+            [14, 14, 6, 0.1],
+            [14, 16, 0.1, 4],            
+            [16, 6, 4, 0.1],
+            [14, 0, 0.1, 6],          
+        ]
+
+class map_grid2:
+    """Here the obstacles are defined for a 20x20 map."""
+    def __init__(self):
+
+        self.start_pos2 = [0.3, 0.3, 0]
+        self.end_pos2 = [0.8, 0.5, 0]
+
+        # [x_position, y_position, x_width, y_width]
+        self.obs = [
             [3.3, 0, 2, 0.2],   # box_wall_right
             [0, 1, 0.5, 0.2],   # box_wall_left
             [1.7, 0.7, 0.5, 0.2],    # box_wp1
@@ -421,6 +438,7 @@ class map_grid:
             [3.61, 1.95, 0.4, 0.2],  # box_wp6
         ]
 
+
 if __name__ == '__main__':
     print("Executing hybrid A* algorithm")
     p = argparse.ArgumentParser()
@@ -429,7 +447,7 @@ if __name__ == '__main__':
     p.add_argument('-e', action='store_true', help='add extra cost or not')
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
-    start_pos = [0.3, 0.3, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [1, 0.3, 0] # Target point [x,y, angle]
+    start_pos = [0.4, 0.4, pi/4]      # Here defined initial position [x,y,angle]
+    end_pos = [1.9, 1.3, pi/2] # Target point [x,y, angle]
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
