@@ -15,6 +15,7 @@ from utils.environment import Environment
 from utils.dubins_path import DubinsPath
 from utils.astar import Astar
 from utils.utils import plot_a_car, get_discretized_thetas, round_theta, same_point
+from utils.cases import TestCase2
 
 
 """ ---------------------------------------------------------------
@@ -27,7 +28,7 @@ from utils.utils import plot_a_car, get_discretized_thetas, round_theta, same_po
 
 class HybridAstar:
     """ Hybrid A* search procedure. """
-    def __init__(self, car, grid, reverse, unit_theta=pi/12, dt=1e-2, check_dubins=1):
+    def __init__(self, car, grid, reverse=True, unit_theta=pi/12, dt=1e-2, check_dubins=1):
         self.car = car
         self.grid = grid
         self.reverse = reverse
@@ -249,7 +250,7 @@ class HybridAstar:
 
 def main_hybrid_a(heu,start_pos, end_pos,reverse, extra, grid_on):
 
-    tc = map_grid()
+    tc = TestCase2()
     env = Environment(tc.obs)
     car = SimpleCar(env, start_pos, end_pos)
     grid = Grid(env)
@@ -411,14 +412,13 @@ class map_grid:
         self.start_pos2 = [4, 4, 0]  # default values
         self.end_pos2 = [4, 8, -pi]  # default
         self.obs = [
-            [0, 6, 6, 0.1],
-            [6, 0, 0.1, 4],
-            [0, 14, 4, 0.1],
-            [6, 14, 0.1, 6],
-            [14, 14, 6, 0.1],
-            [14, 16, 0.1, 4],            
-            [16, 6, 4, 0.1],
-            [14, 0, 0.1, 6],          
+            [3.3, 0, 2, 0.2],   # box_wall_right
+            [0, 1, 0.5, 0.2],   # box_wall_left
+            [1.7, 0.7, 0.5, 0.2],    # box_wp1
+            [3.16, 0.7, 0.5, 0.2],   # box_wp2
+            [1.2, 1.65, 0.2, 0.4],   # random_1
+            [2.3, 1.65, 0.4, 0.4],   # random_2
+            [3.61, 1.95, 0.4, 0.2],  # box_wp6
         ]
 
 if __name__ == '__main__':
@@ -430,6 +430,6 @@ if __name__ == '__main__':
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
     start_pos = [0.3, 0.3, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [0.6, 0.3, 0] # Target point [x,y, angle]
+    end_pos = [1, 0.3, 0] # Target point [x,y, angle]
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
