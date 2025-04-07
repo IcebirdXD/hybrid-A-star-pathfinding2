@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 
 from utils.car import SimpleCar
 from utils.environment import Environment
-from utils.cases import TestCase, TestCase2
+from utils.cases import TestCase
 from utils.utils import transform, directional_theta, plot_a_car, distance
 
 from time import time
@@ -278,7 +278,7 @@ class DubinsPath:
 
 def main():
 
-    tc = TestCase2()
+    tc = TestCase()
 
     env = Environment(tc.obs)
 
