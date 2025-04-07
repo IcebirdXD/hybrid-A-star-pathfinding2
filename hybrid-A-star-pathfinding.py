@@ -431,7 +431,7 @@ class map_grid2:
         self.obs = [
             [3.3, 0, 2, 0.2],   # box_wall_right
             [0, 1, 0.5, 0.2],   # box_wall_left
-            [1.7, 0.7, 0.5, 0.2],    # box_wp1
+            [1.45, 0.7, 0.5, 0.2],    # box_wp1
             [3.16, 0.7, 0.5, 0.2],   # box_wp2
             [1.2, 1.65, 0.2, 0.4],   # random_1
             [2.3, 1.65, 0.4, 0.4],   # random_2
@@ -447,7 +447,7 @@ if __name__ == '__main__':
     p.add_argument('-e', action='store_true', help='add extra cost or not')
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
-    start_pos = [0.2, 0.2, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [1.7, 0.4, pi/4] # Target point [x,y, angle]
+    start_pos = [0.3, 0.3, 0]      # Here defined initial position [x,y,angle]
+    end_pos = [1.7, 0.5, 0] # Target point [x,y, angle]
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
