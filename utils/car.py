@@ -29,7 +29,7 @@ class SimpleCar:
         self.l = float(l)
         self.max_phi = max_phi
 
-        self.carl = 0.4 * self.l
+        self.carl = 0.3 * self.l
         self.carw = 0.3 * self.l
 
         self.whll = 0.05 * self.l
@@ -85,7 +85,7 @@ class SimpleCar:
         self.c4 = transform(x, y, 0.15*self.l, 0.15*self.l, theta, 4)
         #print("c1:", self.c1)
         vertex = [self.c1.tolist(), self.c2.tolist(), self.c4.tolist(), self.c3.tolist()]
-        #print(f"Bounding box vertices: {vertex}")
+        print(f"Bounding box vertices: {vertex}")
         return vertex
     
     def get_car_state(self, pos, phi=0):
@@ -96,14 +96,14 @@ class SimpleCar:
         pos = [x, y, theta]
         self.get_car_bounding(pos)
 
-        c_      = transform(x, y, self.l, 0.2*self.l, theta, 1)
-        self.w1 = transform(c_[0], c_[1], 0.2*self.l, 0.1*self.l, theta+phi, 4)
+        c_      = transform(x, y, self.l, 0.15*self.l, theta, 1)
+        self.w1 = transform(c_[0], c_[1], 0.15*self.l, 0.05*self.l, theta+phi, 4)
         
-        c_      = transform(x, y, self.l, 0.2*self.l, theta, 2)
-        self.w2 = transform(c_[0], c_[1], 0.2*self.l, 0.1*self.l, theta+phi, 4)
+        c_      = transform(x, y, self.l, 0.15*self.l, theta, 2)
+        self.w2 = transform(c_[0], c_[1], 0.15*self.l, 0.05*self.l, theta+phi, 4)
         
-        self.w3 = transform(x, y, 0.2*self.l, 0.1*self.l, theta, 3)
-        self.w4 = transform(x, y, 0.2*self.l, 0.3*self.l, theta, 4)
+        self.w3 = transform(x, y, 0.15*self.l, 0.1*self.l, theta, 3)
+        self.w4 = transform(x, y, 0.15*self.l, 0.3*self.l, theta, 4)
         
         model = [
             Rectangle(self.c4, self.carl, self.carw, angle=degrees(theta), fc='y', ec='k'),
