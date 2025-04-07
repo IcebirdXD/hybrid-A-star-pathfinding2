@@ -216,19 +216,19 @@ class DubinsPath:
         #   4. outer ringsector
 
         if not self.car.is_pos_safe(end_pos):
-            print("The end_pos is not safe!")
+            #print("The end_pos is not safe!")
             return False
         
         rs_inner, rs_outer = self.construct_ringsectors(start_pos, end_pos, d, c, r)
         
         if not self.car.env.ringsector_safe(rs_inner):
-            print("The inner ringsector is not safe!")
+            #print("The inner ringsector is not safe!")
             return False
         
         if not self.car.env.ringsector_safe(rs_outer):
-            print("The outer ringsector is not safe!")
+            #print("The outer ringsector is not safe!")
             return False
-        print("The turning route is safe!")
+        #print("The turning route is safe!")
         return True
     
     def construct_ringsectors(self, start_pos, end_pos, d, c, r):

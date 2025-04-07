@@ -67,7 +67,7 @@ def distance(pt1, pt2):
     return d
 
 
-def same_point(pt1, pt2, h=1e-1):
+def same_point(pt1, pt2, h=5e-2):
     """ Check two points are same within a samll error. """
 
     d = distance(pt1, pt2)

@@ -75,10 +75,10 @@ class Astar:
     
     def search_path(self, goal):
         """ Search the path by astar. """
-
+        #print(f"Attempting to connect to goal: {goal}")
         goal = self.grid.to_cell_id(goal)
 
-        print(f"Attempting to connect to goal: {goal}")
+        
 
         if goal in self.table:
             return self.table[self.table.index(goal)].g
@@ -95,7 +95,7 @@ class Astar:
         while open_:
 
             count += 1
-            print(f"Iteration {count}: Open list size: {len(open_)}, Closed list size: {len(closed_)}")
+            #print(f"Iteration {count}: Open list size: {len(open_)}, Closed list size: {len(closed_)}")
 
             best = min(open_, key=lambda x: x.f)
 
