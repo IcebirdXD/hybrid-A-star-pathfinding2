@@ -48,6 +48,7 @@ class TestCase2:
 
 
         # [x_position, y_position, x_width, y_width]
+        # Discovery: the x-position and y-position are the bottom left corner of the box
         self.obs = [
             [3.3, 0, 2, 0.2],   # box_wall_right
             [0, 1, 0.5, 0.2],   # box_wall_left
