@@ -449,8 +449,9 @@ if __name__ == '__main__':
     args = p.parse_args()
     #start_pos = [1.6, 0.5, 0] # start position at wp1
     #end_pos = [5.21-1.8,1.1, 0] # end position at wp2
-    start_pos = [5.21-1.8,1.1, 0]
-    end_pos = [5.21-1.8, 2.75-0.2, -pi]
-    
+    #start_pos = [5.21-1.8,1.1, 0]
+    #end_pos = [5.21-1.8, 2.75-0.2, -pi]
+    start_pos = [0.3, 0.3, 0] # start position at wp0
+    end_pos = [1.6, 0.5, 0] # end position at wp1
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
