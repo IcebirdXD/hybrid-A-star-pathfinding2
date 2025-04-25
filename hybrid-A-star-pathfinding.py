@@ -55,8 +55,8 @@ class HybridAstar:
         self.w1 = 0.95 # weight for astar heuristic
         self.w2 = 0.05 # weight for simple heuristic
         self.w3 = 0.30 # weight for extra cost of steering angle change
-        self.w4 = 0.10 # weight for extra cost of turning
-        self.w5 = 2.00 # weight for extra cost of reversing
+        self.w4 = 0.30 # weight for extra cost of turning
+        self.w5 = 0.50 # weight for extra cost of reversing
 
         self.thetas = get_discretized_thetas(self.unit_theta)
     
@@ -447,7 +447,10 @@ if __name__ == '__main__':
     p.add_argument('-e', action='store_true', help='add extra cost or not')
     p.add_argument('-g', action='store_true', help='show grid or not')
     args = p.parse_args()
-    start_pos = [1.7, 0.5, 0]      # Here defined initial position [x,y,angle]
-    end_pos = [5.21-1.8, 1.1, 0] # Target point [x,y, angle]
+    #start_pos = [1.6, 0.5, 0] # start position at wp1
+    #end_pos = [5.21-1.8,1.1, 0] # end position at wp2
+    start_pos = [5.21-1.8,1.1, 0]
+    end_pos = [5.21-1.8, 2.75-0.2, -pi]
+    
     main_hybrid_a(args.heu,start_pos,end_pos,args.r,args.e,args.g)
     print("An optimal path was computed using hybrid A* algorithm")
